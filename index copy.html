@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.1.7/aframe/build/aframe-ar.js"></script>
+
+    <script src="color-toggle.js"></script>
+    <script src="mover.js"></script>
+    <script src="return-emitter.js"></script>
+    <script src="target-marker.js"></script>
+
+    <title>Hello!</title>
+</head>
+
+<body>
+    <a-scene cursor="rayOrigin: mouse">
+        <a-assets>
+            <a-asset-item id="chair-model"
+                src="https://cdn.glitch.com/b3880c9f-efbe-4f05-ba7a-3b22bab178d8%2FModel.glb?1555095532662"></a-asset-item>
+            <a-asset-item id="basketball"
+                src="https://cdn.glitch.com/2ae4e29c-79b6-4e2c-9207-471c89e87507%2Fbasketball.glb?v=1620862625459"></a-asset-item>
+        </a-assets>
+        <!-- <a-box position="-1.5 1 -1.5" rotation="0 0 0" color="#4CC3D9" return-emitter
+            animation="property: rotation; to: 0 360 0; easing: linear; dur:5000; loop:true"></a-box> -->
+        <!-- <a-sphere position="0 4 -4" radius="1.25" color="#EF2D5E" mover></a-sphere> -->
+        <!-- <a-cylinder position="2 0.75 -2" radius="0.5" height="1.5" color="#FFC65D" 
+            return-emitter target-marker></a-cylinder> -->
+        <a-plane position="0 0 -4" rotation="-90 0 0" width="8" height="8" color="#7BC8A4"
+            target-marker></a-plane>
+
+        <!-- <a-entity position="0 1.5 -1" gltf-model="#chair-model"></a-entity> -->
+        <!-- <a-entity position="-1 0.5 -0.5" gltf-model="#basketball"></a-entity> -->
+
+        <!-- <a-entity camera="active: true" look-controls wasd-controls position="0 0 0" data-aframe-default-camera></a-entity> -->
+
+
+        <a-entity id="rig">
+            <a-entity camera position="0 1 0" look-controls>
+                <!-- <a-cursor id="cursor" raycaster fuse="true" fusetimeout="3000"></a-cursor> -->
+            </a-entity>
+        </a-entity>
+    </a-scene>
+</body>
+
+</html>
+
+<!--https://glitch.com/edit/#!/uwbox-->

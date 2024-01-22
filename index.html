@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.1.7/aframe/build/aframe-ar.js"></script>
+
+    <script src="color-toggle.js"></script>
+    <script src="mover.js"></script>
+    <script src="return-emitter.js"></script>
+    <script src="target-marker.js"></script>
+
+    <title>Hello!</title>
+</head>
+
+<body>
+    <a-scene cursor="rayOrigin: mouse">
+        <a-marker type="pattern" url="./pattern/pattern-hiro.patt">
+            <a-plane position="0 0.1 0" rotation="-90 0 0" width="2" height="2" color="#0000ff" target-marker></a-plane>
+        </a-marker>
+
+        <a-entity id="rig">
+            <a-entity camera>
+            </a-entity>
+        </a-entity>
+    </a-scene>
+</body>
+
+</html>
+
+<!--https://glitch.com/edit/#!/uwbox-->

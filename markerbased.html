@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Marker-based AR</title>
+
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.1.7/aframe/build/aframe-ar.js"></script>
+
+    <script src="target-marker.js"></script>
+
+    <script>
+        // Component to change to a sequential color on click.
+        AFRAME.registerComponent('cursor-listener', {
+            init: function () {
+                console.log("el", this.el);
+                // const raycaster = new THREE.Raycaster();
+                this.el.addEventListener('click', (evt) => {
+                    // this.el.setAttribute('color', 'red');
+                    console.log("click");
+                });
+            }
+        });
+    </script>
+
+    <style>
+        body {
+            margin: 0px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <a-scene embedded arjs='sourceType: webcam;' cursor="rayOrigin: mouse">
+        <a-marker type="pattern" url="./pattern/pattern-hiro.patt">
+            <a-plane id="imagePlane" position="0 0 -0.1" rotation="-90 0 0" width="2" height="2" color="#ff0"
+                target-marker></a-plane>
+        </a-marker>
+
+        <a-entity id="rig">
+            <a-entity camera look-controls wasd-controls>
+                <!-- <a-cursor id="cursor" raycaster fuse="true" fusetimeout="3000"></a-cursor> -->
+            </a-entity>
+        </a-entity>
+    </a-scene>
+</body>
+
+</html>
