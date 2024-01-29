@@ -6,29 +6,53 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.1.7/aframe/build/aframe-ar.js"></script>
 
     <script src="color-toggle.js"></script>
     <script src="mover.js"></script>
     <script src="return-emitter.js"></script>
     <script src="target-marker.js"></script>
+    <script src="play-animation.js"></script>
 
     <title>Hello!</title>
 </head>
 
-<body>
-    <a-scene cursor="rayOrigin: mouse">
+<body style="margin: 0px; overflow: hidden;">
+    <a-scene cursor="rayOrigin: mouse" embedded arjs>
+        <a-light color="white" position="0 0 5"></a-light>
+
+        <a-assets>
+            <a-asset-item id="bmw-model" src="./assets/untitled.glb"></a-asset-item>
+            <!-- <a-asset-item id="bmw-model" src="./assets/bmw_e36_318ti.glb"></a-asset-item> -->
+        </a-assets>
         <a-marker type="pattern" url="./pattern/pattern-hiro.patt">
-            <a-plane position="0 0.1 0" rotation="-90 0 0" width="2" height="2" color="#0000ff" target-marker></a-plane>
+            <!-- <a-box position="0 0.1 0" width="2" height="2" color="#0000ff" target-marker></a-box> -->
+
+            <!-- <a-box position="-0.5 1 -0.5" rotation="0 0 0" color="#4CC3D9" return-emitter
+                animation="property: rotation; to: 0 360 0; easing: linear; dur:5000; loop:true" target-marker></a-box> -->
+
+            <a-entity id="model" position="0 0.1 0" gltf-model="#bmw-model" scale="0.4 0.4 0.4" play-animation>
+            </a-entity>
+
+            </a-entity>
         </a-marker>
 
-        <a-entity id="rig">
-            <a-entity camera>
-            </a-entity>
-        </a-entity>
+        <a-entity camera> </a-entity>
     </a-scene>
 </body>
+
+<script>
+    // const timedelay = setTimeout(delayFunction, 5000);
+    function delayFunction() {
+        const model = document.getElementById("model");
+        const animations = model.components['gltf-model'].model.animations;
+
+        console.log("Model animations", animations);
+        model.setAttribute("animation-mixer", "clip: sunroof; loop: repeat;");
+        console.log("Model animation-mixer", model);
+    }
+</script>
 
 </html>
 
