@@ -2,9 +2,9 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
+    <!-- <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.1.7/aframe/build/aframe-ar.js"></script>
@@ -14,46 +14,50 @@
     <script src="return-emitter.js"></script>
     <script src="target-marker.js"></script>
     <script src="play-animation.js"></script>
+    <script src="modify-materials.js"></script>
+    <script src="click-action.js"></script>
 
     <title>Hello!</title>
+    <script>
+        // Component to change to a sequential color on click.
+        AFRAME.registerComponent('cursor-listener', {
+            init: function () {
+                console.log("el", this.el);
+                // const raycaster = new THREE.Raycaster();
+                this.el.addEventListener('click', (evt) => {
+                    // this.el.setAttribute('color', 'red');
+                    console.log("click");
+                });
+            }
+        });
+    </script>
 </head>
 
 <body style="margin: 0px; overflow: hidden;">
-    <a-scene cursor="rayOrigin: mouse" embedded arjs>
+    <a-scene ar cursor="rayOrigin: mouse; fuse: false">
+        <!-- <a-camera mouse-controls>
+            <a-cursor raycaster="objects: .clickable"></a-cursor>
+        </a-camera> -->
         <a-light color="white" position="0 0 5"></a-light>
 
         <a-assets>
             <a-asset-item id="bmw-model" src="./assets/untitled.glb"></a-asset-item>
-            <!-- <a-asset-item id="bmw-model" src="./assets/bmw_e36_318ti.glb"></a-asset-item> -->
         </a-assets>
-        <a-marker type="pattern" url="./pattern/pattern-hiro.patt">
-            <!-- <a-box position="0 0.1 0" width="2" height="2" color="#0000ff" target-marker></a-box> -->
 
-            <!-- <a-box position="-0.5 1 -0.5" rotation="0 0 0" color="#4CC3D9" return-emitter
-                animation="property: rotation; to: 0 360 0; easing: linear; dur:5000; loop:true" target-marker></a-box> -->
-
-            <a-entity id="model" position="0 0.1 0" gltf-model="#bmw-model" scale="0.4 0.4 0.4" play-animation>
-            </a-entity>
-
+        <a-marker type="pattern" url="./pattern/pattern-hiro.patt" emitevents="true">
+            <a-entity id="model" class="clickable" position="0 0 -1.5" gltf-model="#bmw-model" scale="0.8 0.8 0.8" play-animation>
             </a-entity>
         </a-marker>
-
-        <a-entity camera> </a-entity>
     </a-scene>
+
+    <script>
+        // document.querySelector('a-scene').addEventListener('click', (e) => {
+        //     console.log('Model clicked!', e);
+
+        //     // show an alert
+        //     alert(`Model clicked!2 ${e.detail.intersection.point.x}`);
+        // });
+    </script>
 </body>
 
-<script>
-    // const timedelay = setTimeout(delayFunction, 5000);
-    function delayFunction() {
-        const model = document.getElementById("model");
-        const animations = model.components['gltf-model'].model.animations;
-
-        console.log("Model animations", animations);
-        model.setAttribute("animation-mixer", "clip: sunroof; loop: repeat;");
-        console.log("Model animation-mixer", model);
-    }
-</script>
-
 </html>
-
-<!--https://glitch.com/edit/#!/uwbox-->
