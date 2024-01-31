@@ -17,10 +17,16 @@ AFRAME.registerComponent("play-animation", {
   },
 
   load: function (model) {
+    console.log("inside play");
     this.model = model;
     this.mixer = new THREE.AnimationMixer(model);
     this.model.animations.forEach((animation) => {
       this.mixer.clipAction(animation, model).play();
+    });
+    model.traverse((node) => {
+      if (node.isMesh) {
+        node.material.color.set(0x00ff00); // Set color to green
+      }
     });
   },
 
