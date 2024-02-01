@@ -7,11 +7,37 @@ AFRAME.registerComponent("play-animation", {
     this.el.addEventListener(
       "click",
       function (e) {
-        console.log("animation added");
         var model = this.el.getObject3D("mesh");
-        alert(`Model clicked! ${model.name}`);
-
         this.load(model);
+      }.bind(this)
+    );
+
+    this.el.addEventListener(
+      "model-loaded",
+      function (e) {
+        var model = this.el.getObject3D("mesh");
+        const handleClick = () => {
+          this.load(model);
+        };
+
+        const arjsDebugUIContainer = document.getElementById(
+          "arjsDebugUIContainer"
+        );
+
+        var domElement = document.createElement("button");
+        domElement.style.display = "block";
+        arjsDebugUIContainer.appendChild(domElement);
+
+        domElement.id = "test";
+        domElement.innerHTML = "click to play animation";
+        domElement.href = "javascript:void(0)";
+        domElement.style.position = "absolute";
+        domElement.style.top = "-500%";
+        domElement.style.left = "10px";
+        domElement.addEventListener("click", function (e) {
+          e.preventDefault();
+          handleClick();
+        });
       }.bind(this)
     );
   },

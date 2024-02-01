@@ -2,62 +2,33 @@
 <html lang="en">
 
 <head>
-    <!-- <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.1.7/aframe/build/aframe-ar.js"></script>
 
-    <script src="color-toggle.js"></script>
-    <script src="mover.js"></script>
-    <script src="return-emitter.js"></script>
-    <script src="target-marker.js"></script>
     <script src="play-animation.js"></script>
-    <script src="modify-materials.js"></script>
     <script src="click-action.js"></script>
 
     <title>Hello!</title>
-    <script>
-        // Component to change to a sequential color on click.
-        AFRAME.registerComponent('cursor-listener', {
-            init: function () {
-                console.log("el", this.el);
-                // const raycaster = new THREE.Raycaster();
-                this.el.addEventListener('click', (evt) => {
-                    // this.el.setAttribute('color', 'red');
-                    console.log("click");
-                });
-            }
-        });
-    </script>
 </head>
 
-<body style="margin: 0px; overflow: hidden;">
-    <a-scene ar cursor="rayOrigin: mouse; fuse: false">
-        <!-- <a-camera mouse-controls>
-            <a-cursor raycaster="objects: .clickable"></a-cursor>
-        </a-camera> -->
+<body style='margin : 0px; overflow: hidden;'>
+    <a-scene id="mainscene" embedded ar cursor="rayOrigin: mouse; fuse: false" arjs='sourceType: webcam;'>
         <a-light color="white" position="0 0 5"></a-light>
 
         <a-assets>
             <a-asset-item id="bmw-model" src="./assets/untitled.glb"></a-asset-item>
         </a-assets>
 
-        <a-marker type="pattern" url="./pattern/pattern-hiro.patt" emitevents="true">
-            <a-entity id="model" class="clickable" position="0 0 -1.5" gltf-model="#bmw-model" scale="0.8 0.8 0.8" play-animation>
+        <a-marker type="pattern" url="./pattern/pattern-hiro.patt">
+            <a-entity id="model" class="clickable" position="0 0 -1.5" gltf-model="#bmw-model" scale="0.8 0.8 0.8"
+                play-animation>
             </a-entity>
         </a-marker>
+        <div aframe-injected></div>
     </a-scene>
-
-    <script>
-        // document.querySelector('a-scene').addEventListener('click', (e) => {
-        //     console.log('Model clicked!', e);
-
-        //     // show an alert
-        //     alert(`Model clicked!2 ${e.detail.intersection.point.x}`);
-        // });
-    </script>
 </body>
+<script>
+
+</script>
 
 </html>
